@@ -1,3 +1,3 @@
-module packaging-calculator
+module package-calculator
 
 go 1.21.0
