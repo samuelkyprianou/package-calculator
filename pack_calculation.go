@@ -1,11 +1,17 @@
 package main
 
+var PackSizes = []int{5000, 2000, 1000, 500, 250}
+
 func CalculatePacks(oQuantity int) map[int]int {
-	return map[int]int{
-		250:  0,
-		500:  0,
-		1000: 0,
-		2000: 0,
-		5000: 0,
+	result := make(map[int]int)
+
+	for _, packSize := range PackSizes {
+		if oQuantity >= packSize {
+			numPacks := oQuantity / packSize
+			result[packSize] = numPacks
+			oQuantity -= numPacks * packSize
+		}
 	}
+
+	return result
 }

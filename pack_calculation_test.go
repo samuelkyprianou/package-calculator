@@ -8,10 +8,6 @@ import (
 func TestCalculatePacks1(t *testing.T) {
 	expected := map[int]int{
 		250:  1,
-		500:  0,
-		1000: 0,
-		2000: 0,
-		5000: 0,
 	}
 
 	result := CalculatePacks(1)
@@ -25,10 +21,6 @@ func TestCalculatePacks1(t *testing.T) {
 func TestCalculatePacks250(t *testing.T) {
 	expected := map[int]int{
 		250:  1,
-		500:  0,
-		1000: 0,
-		2000: 0,
-		5000: 0,
 	}
 
 	result := CalculatePacks(250)
@@ -41,11 +33,7 @@ func TestCalculatePacks250(t *testing.T) {
 
 func TestCalculatePacks251(t *testing.T) {
 	expected := map[int]int{
-		250:  0,
 		500:  1,
-		1000: 0,
-		2000: 0,
-		5000: 0,
 	}
 
 	result := CalculatePacks(251)
@@ -60,9 +48,6 @@ func TestCalculatePacks501(t *testing.T) {
 	expected := map[int]int{
 		250:  1,
 		500:  1,
-		1000: 0,
-		2000: 0,
-		5000: 0,
 	}
 
 	result := CalculatePacks(501)
@@ -75,7 +60,6 @@ func TestCalculatePacks501(t *testing.T) {
 
 func TestCalculatePacks8500(t *testing.T) {
 	expected := map[int]int{
-		250:  0,
 		500:  1,
 		1000: 1,
 		2000: 1,
@@ -93,8 +77,6 @@ func TestCalculatePacks8500(t *testing.T) {
 func TestCalculatePacks12001(t *testing.T) {
 	expected := map[int]int{
 		250:  1,
-		500:  0,
-		1000: 0,
 		2000: 1,
 		5000: 2,
 	}
