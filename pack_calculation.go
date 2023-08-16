@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 // recursive is a recursive function that takes a order quantity, packSizes, and accumulatedSizes.
 // It returns a slice of accumulated sizes that sum up to or exceed the given order quantity.
 func recursive(oQuantity int, packSizes []int, accumulatedSizes []int) []int {
@@ -39,13 +37,7 @@ func getOptimalSlice(arr [][]int) []int {
 
 // CalculatePacks takes a order quantity and calculates the optimal packing of sizes.
 // It returns a map of pack sizes and their quantities.
-func CalculatePacks(oQuantity int) map[int]int {
-	sizes, err := readConfig() // Read the configuration pack sizes
-	if err != nil {
-		fmt.Println("Error reading config:", err) // Print an error message if reading fails
-		return nil
-	}
-
+func CalculatePacks(oQuantity int, sizes map[int]int) map[int]int{
 	packSizes := OrderPackSizes(sizes) // Order the pack sizes
 	reversePackSizes := Reverse(packSizes) // Reverse the ordered pack sizes
 	var allCalculations = [][]int{} // Initialize a slice to store all calculations

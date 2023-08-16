@@ -7,17 +7,20 @@ import (
 )
 
 func PacksHandler(w http.ResponseWriter, r *http.Request) {
+	packSizes, err := readConfig()
+	if err != nil {
+		http.Error(w, "Error reading config", http.StatusInternalServerError)
+		return
+	}
 	query := r.URL.Query()
 	orderQuantityStr := query.Get("order_quantity")
 	orderQuantity, err := strconv.Atoi(orderQuantityStr)
-	
-
 	if err != nil {
 		http.Error(w, "Invalid order quantity", http.StatusBadRequest)
 		return
 	}
-
-	packsNeeded := CalculatePacks(orderQuantity)
+	
+	packsNeeded := CalculatePacks(orderQuantity, packSizes)
 	response := "<h1>Calculated Packs:</h1>\n"
 	for size, count := range packsNeeded {
 		if count > 0 {
