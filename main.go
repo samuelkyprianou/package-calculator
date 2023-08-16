@@ -6,6 +6,7 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
+	"github.com/samuelkyprianou/package-calculator/calculatepacks"
 )
 
 func PacksHandler(c *gin.Context) {
@@ -21,7 +22,7 @@ func PacksHandler(c *gin.Context) {
 		return
 	}
 
-	packsNeeded := CalculatePacks(orderQuantity, packSizes)
+	packsNeeded := calculatepacks.CalculatePacks(orderQuantity, packSizes)
 	response := "<h1>Calculated Packs:</h1>\n"
 	for size, count := range packsNeeded {
 		if count > 0 {
