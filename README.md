@@ -19,6 +19,10 @@ Example test cases are as follows:
 | 12001         | 2 x 5000, 1 x 2000, 1 x 250            | 3 x 5000                  |
 
 
+### Deployed Setup
+
+to run this application please visit - https://munearnq2n.us-east-1.awsapprunner.com/
+
 ### Local Setup
 
 To test this API locally clone the repository, and run `go get .` in the root of the repository. After dependencies are installed, you can run the application using `go run .`, this will start the application on http://localhost:8080/. To run the test file run `cd calculatepacks` followed by `go test`.
