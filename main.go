@@ -33,7 +33,7 @@ func PacksHandler(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		http.ServeFile(w, r, "order_form.html")
+		http.ServeFile(w, r, "index.html")
 	})
 	http.HandleFunc("/calculate_packs", PacksHandler)
 	fmt.Println("Server started at http://localhost:8080")
