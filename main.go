@@ -36,7 +36,7 @@ func main() {
 		http.ServeFile(w, r, "index.html")
 	})
 	http.HandleFunc("/calculate_packs", PacksHandler)
-	fmt.Println("Server started at http://localhost:8080")
+	fmt.Println("Server started on port 8080")
 	http.ListenAndServe(":8080", nil)
 }
 
