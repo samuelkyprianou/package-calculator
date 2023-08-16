@@ -4,22 +4,23 @@ import (
 	"fmt"
 	"net/http"
 	"strconv"
+
+	"github.com/gin-gonic/gin"
 )
 
-func PacksHandler(w http.ResponseWriter, r *http.Request) {
+func PacksHandler(c *gin.Context) {
 	packSizes, err := readConfig()
 	if err != nil {
-		http.Error(w, "Error reading config", http.StatusInternalServerError)
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Error reading config"})
 		return
 	}
-	query := r.URL.Query()
-	orderQuantityStr := query.Get("order_quantity")
+	orderQuantityStr := c.DefaultQuery("order_quantity", "0")
 	orderQuantity, err := strconv.Atoi(orderQuantityStr)
 	if err != nil {
-		http.Error(w, "Invalid order quantity", http.StatusBadRequest)
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid order quantity"})
 		return
 	}
-	
+
 	packsNeeded := CalculatePacks(orderQuantity, packSizes)
 	response := "<h1>Calculated Packs:</h1>\n"
 	for size, count := range packsNeeded {
@@ -27,16 +28,15 @@ func PacksHandler(w http.ResponseWriter, r *http.Request) {
 			response += fmt.Sprintf("<p>%d x %d</p>\n", count, size)
 		}
 	}
-	w.Header().Set("Content-Type", "text/html")
-	w.Write([]byte(response))
+	c.Data(http.StatusOK, "text/html; charset=utf-8", []byte(response))
 }
 
 func main() {
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		http.ServeFile(w, r, "index.html")
+	r := gin.Default()
+	r.GET("/", func(c *gin.Context) {
+		c.File("index.html")
 	})
-	http.HandleFunc("/calculate_packs", PacksHandler)
+	r.GET("/calculate_packs", PacksHandler)
 	fmt.Println("Server started on port 8080")
-	http.ListenAndServe(":8080", nil)
+	r.Run(":8080") // Run the server
 }
-
